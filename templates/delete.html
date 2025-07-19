@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Student</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f2f2f2; text-align: center; }
+        .container { background: white; width: 400px; margin: 100px auto; padding: 20px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); }
+        button { margin: 10px; padding: 10px 20px; border-radius: 5px; border: none; }
+        .yes { background: red; color: white; }
+        .no { background: gray; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Are you sure you want to delete {{ student.name }}?</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="yes">Yes, Delete</button>
+            <a href="{% url 'student_list' %}" class="no">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student List</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f9f9f9; text-align: center; }
+        table { margin: 20px auto; border-collapse: collapse; width: 80%; background: white; box-shadow: 0 0 8px rgba(0,0,0,0.1); }
+        th, td { padding: 10px; border: 1px solid #ddd; }
+        th { background: #f2f2f2; }
+        a, button { margin: 5px; text-decoration: none; padding: 8px 12px; border-radius: 5px; }
+        a.add { background: #4CAF50; color: white; }
+        a.edit { background: #2196F3; color: white; }
+        button.delete { background: red; color: white; border: none; }
+        form.inline { display: inline; }
+    </style>
+</head>
+<body>
+{% csrf_token%}
+    <h2>tailwebs</h2>
+    <a href="{% url 'student' %}" class="add">Add New Student</a>
+    <a href="{% url 'logout' %}" class="add" style="background:#555;">Logout</a>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Subject</th>
+            <th>Marks</th>
+            <th>Actions</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.subject }}</td>
+            <td>{{ student.marks }}</td>
+            <td>
+                <a href="{% url 'edit' student.id %}" class="edit">Edit</a>
+                <form action="{% url 'delete' student.id %}" method="POST" class="inline">
+                    {% csrf_token %}
+                    <button type="submit" class="delete" onclick="return confirm('Delete this student?');">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No students found.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

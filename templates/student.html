@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Student</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f2f2f2; text-align: center; }
+        form { background: white; width: 400px; margin: 50px auto; padding: 20px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); }
+        input, button { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        button { background: #4CAF50; color: white; border: none; }
+        a { text-decoration: none; color: #333; display: block; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Add Student</h2>
+    {% if error %}
+    <script>alert("{{ error }}");</script>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Student Name" required>
+        <input type="text" name="subject" placeholder="Subject" required>
+        <input type="number" name="marks" placeholder="Marks" required>
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'student_list' %}">Back to List</a>
+</body>
+</html>
